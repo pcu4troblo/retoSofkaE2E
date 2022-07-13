@@ -70,6 +70,38 @@ pipeline {
             }
         }
 
+        stage('Analisis Sonar'){
+            steps{
+                withCredentials([
+                    usernamePassword(credentialsId: 'Repositorio-Maven', usernameVariable: 'MAVEN_USER', passwordVariable: 'MAVEN_PASSWORD'),
+                ]) {
+                    script {
+                        withSonarQubeEnv('SonarQube') {
+                            dir("${workspace}"){
+                                sh "./gradlew -version"
+                                sh "chmod 777 ./gradlew";
+                                sh "./gradlew --info sonarqube -Dsonar.projectKey=${NOMBRE_PROYECTO_GIT} -Dsonar.projectName=${NOMBRE_PROYECTO_GIT} -Dsonar.projectVersion=${BUILD_ID} -x test"
+                            }
+                        }
+
+                        }
+                        timeout(time: 30, unit: 'MINUTES') {
+                            def qg = waitForQualityGate()
+                            print "Finished waiting"
+                            QUALITY_GATE_RESULT = qg.status
+                            catchError {
+                                if (QUALITY_GATE_RESULT != 'OK') {
+                                    error "Fallo en el quality gate de Sonar, estado: ${qg.status}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
         stage('Generar evidencia') {
             steps {
                 catchError {
@@ -83,11 +115,7 @@ pipeline {
                         reportTitles         : ''
                     ])
                     echo 'Reporte Html realizado con exito'
-
                 }
-
-
-
             }
         }
 

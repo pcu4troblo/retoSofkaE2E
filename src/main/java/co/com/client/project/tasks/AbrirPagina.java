@@ -10,10 +10,8 @@ import org.slf4j.LoggerFactory;
 
 public class AbrirPagina implements Task {
 
-    private String rutaPagina;
+    private final String rutaPagina;
     private static final Logger LOGGER = LoggerFactory.getLogger(AbrirPagina.class);
-    private static final String MSG_EXEC_ACCION = "Accediendo a la pagina: %s";
-    private static final String MSG_FIN_ACCION = "Página cargada con exito";
 
     public AbrirPagina(String rutaPagina) {
         this.rutaPagina = rutaPagina;
@@ -21,16 +19,16 @@ public class AbrirPagina implements Task {
 
     /**
      * se abre el link del ambiente de pruebas seteado en ruta de propiedades
-     * @return
+     * @return AbrirPagina
      */
     public static AbrirPagina url() {
-        return Tasks.instrumented(AbrirPagina.class, Constantes.URL);
+        return Tasks.instrumented(AbrirPagina.class, Constantes.PropertiesManager.URL);
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        LOGGER.info(String.format(MSG_EXEC_ACCION, rutaPagina));
+        LOGGER.info(Constantes.Messages.MSG_EXEC_ACCION_PAGINA,rutaPagina);
         actor.attemptsTo(Open.url(rutaPagina));
-        LOGGER.info(MSG_FIN_ACCION);
+        LOGGER.info(Constantes.Messages.MSG_FIN_ACCION_PAGINA);
     }
 }

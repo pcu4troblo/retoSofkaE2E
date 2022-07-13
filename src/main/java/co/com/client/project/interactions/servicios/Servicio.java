@@ -6,11 +6,6 @@ import java.util.Map;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
-/**
- * @author lmarimono, lmarimono@choucairtesting.com
- * @version 1.0.0
- * consumo de servicios
- */
 public class Servicio {
 
     private Servicio() {

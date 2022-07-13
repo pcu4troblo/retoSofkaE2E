@@ -1,13 +1,18 @@
 package co.com.client.project.questions;
 
+import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 
-public class TestQuestion {
+public class TestQuestion implements Question {
 
-    private TestQuestion() {
+    public static TestQuestion validarAccion() {
+        return new TestQuestion();
     }
 
-    public static ValidarAccion validarAccion() {
-        return new ValidarAccion();
+    @Override
+    public Object answeredBy(Actor actor) {
+        boolean resultado = true; //TODO Implementar validacion logica
+        return resultado;
     }
+
 }
