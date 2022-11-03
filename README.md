@@ -1,6 +1,6 @@
 **Proyecto base para automatizacion de pruebas con Serenity Screenplay**
 
-Proyecto inicial para comenzar a automatizar pruebas con la libreria Serenity utilizando el patron de diseño Screenplay utilizando versiones actualizadas a Cucumber5
+Proyecto inicial para comenzar a automatizar pruebas con la libreria Serenity utilizando el patron de diseño Screenplay utilizando versiones actualizadas a Serenity 3.2.4
 
 **Documentacion oficial**
 
@@ -10,7 +10,7 @@ https://serenity-bdd.github.io/theserenitybook/latest/serenity-screenplay.html
 
 Uso de version con Cucumber5
 
-https://github.com/serenity-bdd/serenity-cucumber5
+https://github.com/serenity-bdd/serenity-core
 
 
 **Antes de iniciar**
@@ -19,7 +19,7 @@ https://github.com/serenity-bdd/serenity-cucumber5
 
     settings.gradle
     build.gradle
-    serenity.properties
+    serenity.conf
 
 Completar tasks TODO que deben actualizarse para cada cliente (nombre del proyecto, uso de dependencias, actualizacion de versiones de gradle)
 
@@ -27,15 +27,9 @@ Completar tasks TODO que deben actualizarse para cada cliente (nombre del proyec
 
 3. Eliminar carpeta .git antes de subir cambios al repositorio del cliente 
 
-4. Verificar versiones correctas de drivers en carpeta src/test/resources, actualizar con versiones correctas descargadas de:
+4. Verificar configuracion correcta de drivers en archivo serenity.conf src/test/resources/serenity.conf
 
-https://chromedriver.chromium.org/downloads
-
-https://github.com/mozilla/geckodriver/releases
-
-Setear en carpeta src/test/resources y verificar correcta referencia a esta carpeta en archivo serenity.properties
-
-5. Actualizar README.md file
+5. Actualizar README.md 
 
 **Paquetes**
 
@@ -43,5 +37,6 @@ libs - inclusion de .jar propios en el proyecto
 ci - responsabilidad de almacenar jenkinsfile o yml files para CI/CD
 gradle - ubicacion del gradle wrapper
 src - arquitectura de automatizacion
+target - reportes de pruebas
 
 

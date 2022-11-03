@@ -5,6 +5,8 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.rest.interactions.RestInteraction;
 import net.thucydides.core.annotations.Step;
 
+import static net.serenitybdd.screenplay.rest.abilities.CallAnApi.as;
+
 public class Put extends RestInteraction {
     private String resource;
     private String body;
@@ -21,6 +23,6 @@ public class Put extends RestInteraction {
                 .relaxedHTTPSValidation()
                 .body(body)
                 .when()
-                .put(resource);
+                .put(as(actor).resolve(resource));
     }
 }

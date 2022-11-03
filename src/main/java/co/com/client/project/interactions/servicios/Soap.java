@@ -6,6 +6,8 @@ import net.thucydides.core.annotations.Step;
 
 import java.util.Map;
 
+import static net.serenitybdd.screenplay.rest.abilities.CallAnApi.as;
+
 public class Soap extends RestInteraction {
 
     private String resource;
@@ -25,6 +27,6 @@ public class Soap extends RestInteraction {
                 .headers(headers)
                 .body(bodyRequest)
                 .when()
-                .post(resource);
+                .post(as(actor).resolve(resource));
     }
 }

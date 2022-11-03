@@ -7,6 +7,8 @@ import net.thucydides.core.annotations.Step;
 
 import java.util.Map;
 
+import static net.serenitybdd.screenplay.rest.abilities.CallAnApi.as;
+
 public class PostWithHeader extends RestInteraction {
     private String resource;
     private String body;
@@ -26,6 +28,6 @@ public class PostWithHeader extends RestInteraction {
                 .headers(header)
                 .body(body)
                 .when()
-                .post(resource);
+                .post(as(actor).resolve(resource));
     }
 }

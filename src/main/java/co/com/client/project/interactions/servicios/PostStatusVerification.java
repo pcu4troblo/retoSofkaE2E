@@ -5,6 +5,8 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.rest.interactions.RestInteraction;
 import net.thucydides.core.annotations.Step;
 
+import static net.serenitybdd.screenplay.rest.abilities.CallAnApi.as;
+
 public class PostStatusVerification extends RestInteraction {
     private String resource;
     private String body;
@@ -20,7 +22,7 @@ public class PostStatusVerification extends RestInteraction {
         rest().contentType(ContentType.JSON)
                 .relaxedHTTPSValidation()
                 .body(body)
-                .when().post(resource)
+                .when().post(as(actor).resolve(resource))
                 .then().statusCode(200);
     }
 }

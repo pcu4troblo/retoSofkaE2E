@@ -7,6 +7,8 @@ import net.thucydides.core.annotations.Step;
 
 import java.util.Map;
 
+import static net.serenitybdd.screenplay.rest.abilities.CallAnApi.as;
+
 public class GetWithHeader extends RestInteraction {
 
     private Map<String, Object> headers;
@@ -24,6 +26,6 @@ public class GetWithHeader extends RestInteraction {
                 .relaxedHTTPSValidation()
                 .headers(headers)
                 .when()
-                .get(resource);
+                .get(as(actor).resolve(resource));
     }
 }

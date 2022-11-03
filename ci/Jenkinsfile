@@ -21,10 +21,8 @@ pipeline {
         SCM_CREDENTIALS = "" //Credenciales
         SCM_BRANCH = "" //Rama git
         TEST_RUNNER = ""
-        NOMBRE_PROYECTO_GIT = "BaseProject" //Nombre del proyecto en GIT
-        PROXY = ""
+        NOMBRE_PROYECTO_GIT = "base-project-qa" //Nombre del proyecto en GIT
         EMAIL_DEVELOPERS = ""
-        S3_URL = ""
     }
 
     parameters {
@@ -58,7 +56,6 @@ pipeline {
                 {
                     catchError {
                         sh "chmod 777 gradlew"
-                        sh "chmod 777 src/test/resources/driver/chromedriverlinux"
                         echo "RUNNING CLEAN"
                         sh "./gradlew clean"
                         sh "./gradlew test --tests ${TEST_RUNNER} --info"
