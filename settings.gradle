@@ -1,3 +1,2 @@
-//TODO cambiar al nombre del proyecto especifico
-rootProject.name = 'base-project-qa'
+rootProject.name = 'historiaClinicaIntegracionesExternas'
 

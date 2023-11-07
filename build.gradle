@@ -1,73 +1,48 @@
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "net.serenity-bdd:serenity-gradle-plugin:3.2.4"
-    }
-}
-
-
-plugins {
+plugins{
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.0.14'
     id 'java'
+    id 'eclipse'
     id 'idea'
-    id 'org.sonarqube' version "3.3"
 }
 
-apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+defaultTasks 'clean', 'test', 'aggregate'
 
-wrapper {
-    gradleVersion '7.0'
-    distributionType Wrapper.DistributionType.ALL
-}
 
 repositories {
+    jcenter()
     mavenCentral()
-    mavenLocal()
 }
 
-compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"
 
 ext {
-    serenityVersion="3.2.4"
+    serenityVersion = '4.0.14'
+    restAssuredVersion = '5.3.0'
+    lombokVersion = '1.18.24'
+    junitVersion = '5.8.2'
 }
 
-//TODO ajustar dependencias con versiones actualizadas y eliminar dependencias que no apliquen al proyecto
+
 dependencies {
-    implementation "net.serenity-bdd:serenity-cucumber:$serenityVersion"
-    implementation "net.serenity-bdd:serenity-ensure:$serenityVersion"
-    implementation "net.serenity-bdd:serenity-core:$serenityVersion"
-    implementation "net.serenity-bdd:serenity-junit:$serenityVersion"
-    implementation "net.serenity-bdd:serenity-screenplay:$serenityVersion"
-    implementation "net.serenity-bdd:serenity-screenplay-webdriver:$serenityVersion"
-    implementation "net.serenity-bdd:serenity-screenplay-rest:$serenityVersion"
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
-    implementation 'com.github.javafaker:javafaker:1.0.2'
-    implementation 'junit:junit:4.13.2'
-    implementation 'org.slf4j:slf4j-simple:2.0.3'
-    implementation 'org.assertj:assertj-core:3.15.0'
-    implementation 'io.rest-assured:rest-assured:5.2.0'
-    testImplementation 'junit:junit:4.13.2'
+    implementation "net.serenity-bdd:serenity-core:${serenityVersion}",
+            "net.serenity-bdd:serenity-cucumber:${serenityVersion}",
+            "net.serenity-bdd:serenity-junit5:${serenityVersion}",
+            "net.serenity-bdd:serenity-screenplay-rest:${serenityVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityVersion}",
+            "net.serenity-bdd:serenity-ensure:${serenityVersion}",
+            "io.rest-assured:rest-assured:${restAssuredVersion}",
+            "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
+            "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            "org.junit.vintage:junit-vintage-engine:${junitVersion}",
+            "org.junit.platform:junit-platform-runner:1.7.0"
     compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
-    compileOnly fileTree (dir: 'libs', include: '*.jar')
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 
-//TODO ajustar parametros de task test con runners del proyecto
-test {
-    include "**/*TestRunner.class"
-    exclude "**/RunnerExclueded*.class"
+test{
     testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
 }
-test.finalizedBy(aggregate)
 
-sonarqube {
-    properties {
-        property "sonar.java.binaries", "src/main"
-        property "sonar.exclusions", "**/*Generated.java, **/*Templates.java"
-    }
-}
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
