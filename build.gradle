@@ -16,9 +16,8 @@ repositories {
 
 ext {
     serenityVersion = '4.0.14'
-    restAssuredVersion = '5.3.0'
-    lombokVersion = '1.18.24'
     junitVersion = '5.8.2'
+    lombokVersion = '1.18.24'
 }
 
 
@@ -29,11 +28,10 @@ dependencies {
             "net.serenity-bdd:serenity-screenplay-rest:${serenityVersion}",
             "net.serenity-bdd:serenity-screenplay:${serenityVersion}",
             "net.serenity-bdd:serenity-ensure:${serenityVersion}",
-            "io.rest-assured:rest-assured:${restAssuredVersion}",
             "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
             "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
-            "org.junit.vintage:junit-vintage-engine:${junitVersion}",
-            "org.junit.platform:junit-platform-runner:1.7.0"
+            "org.junit.vintage:junit-vintage-engine:${junitVersion}"
+    implementation 'com.github.javafaker:javafaker:1.0.2'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
