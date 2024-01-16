@@ -1,0 +1,4 @@
+Conclusiones
+1. La prueba end to end se ejecutó exitosamente haciendo uso del usuario "standard_user".
+2. Se verificó que cada uno de los módulos involucrados en la prueba se comportaran según lo esperado en los criterios de aceptación.
+3. El ejercicio fue de gran utilidad para repasar y aplicar los conceptos básicos de automatización front, haciendo uso del framework serenity con patrón de diseño screenplay.
