@@ -14,7 +14,9 @@ Feature: Compra de productos
     Then finaliza la compra exitosamente
 
     Examples:
-      | primerProducto        | segundoProducto       |
-      | "Sauce Labs Backpack" | "Sauce Labs Bike Light" |
+      | primerProducto            | segundoProducto                     |
+      | "Sauce Labs Backpack"     | "Sauce Labs Bike Light"             |
+      | "Sauce Labs Bolt T-Shirt" | "Sauce Labs Fleece Jacket"          |
+      | "Sauce Labs Onesie"       | "Test.allTheThings() T-Shirt (Red)" |
 
 
