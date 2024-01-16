@@ -2,6 +2,7 @@
 .gradle/
 build/
 log/
+target/
 hooks/pre-push
 
 # Java
